@@ -1,0 +1,76 @@
+package osi.dao;
+
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import osi.model.Contact;
+
+@Repository
+  public class ContactDAOImpl implements ContactDAO {
+  protected final Log logger = LogFactory.getLog(getClass());
+	
+  @Autowired
+    private SessionFactory sessionFactory;
+	
+	
+  public SessionFactory getSessionFactory() {
+    return sessionFactory;
+  }
+
+
+  public void setSessionFactory(SessionFactory sessionFactory) {
+    this.sessionFactory = sessionFactory;
+  }
+
+  @Override
+    public List<Contact> getContacts() {
+    logger.debug("getContacts...");
+    return sessionFactory.getCurrentSession().createQuery("from Contact")
+      .list();
+		  
+  }
+	
+  @Override
+    public Contact getContactById(Integer id) {
+    Query query = sessionFactory.getCurrentSession().createQuery("from Contact where id = :id");
+    query.setParameter("id", id);
+    return (Contact)query.list().get(0);
+  }
+	
+  @Override
+    public void save(Contact contact) {
+    logger.debug("save..." + contact.getName());
+    //	sessionFactory.getCurrentSession().save(contact);
+		
+    Contact foundContact = getContactById(contact.getId());
+    foundContact.setName(contact.getName());
+    foundContact.setEmail(contact.getEmail());
+    foundContact.setAddress(contact.getAddress());
+    foundContact.setPhone(contact.getPhone());
+  }
+	
+  @Override
+    public void delete(Contact contact) {
+    logger.debug("delete..." + contact.getName());
+    sessionFactory.getCurrentSession().delete(contact);
+  }
+  @Override
+    public void add(Contact contact) {
+    Query query = sessionFactory.getCurrentSession().createSQLQuery("insert into contacts(id,name,email,address,phone) values (:id, :name, :email,:address,:phone)");
+    query.setParameter("id", null);
+    query.setParameter("name", contact.getName());
+    query.setParameter("email", contact.getEmail());
+    query.setParameter("address", contact.getAddress());
+    query.setParameter("phone", contact.getPhone());
+    query.executeUpdate();
+    //		sessionFactory.getCurrentSession().flush();
+    //		sessionFactory.getCurrentSession().save(contact);
+		
+  }
+}
