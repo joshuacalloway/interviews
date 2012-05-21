@@ -1,0 +1,20 @@
+For file file1.txt, five most commonly used letters: l, a, o, y, s, 
+For file file1.txt, three most commonly used characters: l, a,  , 
+For file file1.txt, three most commonly used numbers: 
+For file file1.txt, ten most commonly used words: name, my, joshua, is, hello, calloway, 
+For file file3.txt, five most commonly used letters: 
+For file file3.txt, three most commonly used characters:  , 6, 5, 
+For file file3.txt, three most commonly used numbers: 6, 5, 4, 
+For file file3.txt, ten most commonly used words: 
+For file file2.txt, five most commonly used letters: e, n, v, t, i, 
+For file file2.txt, three most commonly used characters: e,  , n, 
+For file file2.txt, three most commonly used numbers: 
+For file file2.txt, ten most commonly used words: twelve, eleven, ten, nine, eight, seven, six, five, four, three, 
+For file file4.txt, five most commonly used letters: o, n, m, l, k, 
+For file file4.txt, three most commonly used characters: o, n, m, 
+For file file4.txt, three most commonly used numbers: 
+For file file4.txt, ten most commonly used words: ooooooooooooooo, nnnnnnnnnnnnnn, mmmmmmmmmmmmm, llllllllllll, kkkkkkkkkkk, jjjjjjjjjj, iiiiiiiii, hhhhhhhh, ggggggg, ffffff, 
+For file file5.txt, five most commonly used letters: o, n, m, l, k, 
+For file file5.txt, three most commonly used characters: ?, ', o, 
+For file file5.txt, three most commonly used numbers: 
+For file file5.txt, ten most commonly used words: ooooooooooooooo, nnnnnnnnnnnnnn, mmmmmmmmmmmmm, llllllllllll, kkkkkkkkkkk, jjjjjjjjjj, iiiiiiiii, hhhhhhhh, ggggggg, ffffff, 
