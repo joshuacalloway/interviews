@@ -1,0 +1,27 @@
+[debug] 
+[debug] Initial source changes: 
+[debug] 	removed:Set()
+[debug] 	added: Set()
+[debug] 	modified: Set(C:\dijkstra\src\test\scala\dijkstra\DijkstrasAlgorithmSpec.scala)
+[debug] Removed products: Set()
+[debug] Modified external sources: Set()
+[debug] Modified binary dependencies: Set()
+[debug] Initial directly invalidated sources: Set(C:\dijkstra\src\test\scala\dijkstra\DijkstrasAlgorithmSpec.scala)
+[debug] 
+[debug] Sources indirectly invalidated by:
+[debug] 	product: Set()
+[debug] 	binary dep: Set()
+[debug] 	external source: Set()
+[debug] Initially invalidated: Set(C:\dijkstra\src\test\scala\dijkstra\DijkstrasAlgorithmSpec.scala)
+[info] Compiling 1 Scala source to C:\dijkstra\target\scala-2.9.1\test-classes...
+[debug] Interfacing (CompilerInterface) with Scala compiler version 2.9.1.final
+[debug] Calling Scala compiler with arguments  (CompilerInterface):
+[debug] 	-d
+[debug] 	C:\dijkstra\target\scala-2.9.1\test-classes
+[debug] 	-bootclasspath
+[debug] 	C:\Program Files (x86)\Java\jre6\lib\resources.jar;C:\Program Files (x86)\Java\jre6\lib\rt.jar;C:\Program Files (x86)\Java\jre6\lib\sunrsasign.jar;C:\Program Files (x86)\Java\jre6\lib\jsse.jar;C:\Program Files (x86)\Java\jre6\lib\jce.jar;C:\Program Files (x86)\Java\jre6\lib\charsets.jar;C:\Program Files (x86)\Java\jre6\lib\modules\jdk.boot.jar;C:\Program Files (x86)\Java\jre6\classes;C:\Users\jpc\.sbt\boot\scala-2.9.1\lib\scala-library.jar
+[debug] 	-classpath
+[debug] 	C:\dijkstra\target\scala-2.9.1\test-classes;C:\dijkstra\target\scala-2.9.1\classes;C:\Users\jpc\.ivy2\cache\org.scalatest\scalatest_2.9.1\jars\scalatest_2.9.1-1.6.1.jar
+[debug] 	C:\dijkstra\src\test\scala\dijkstra\DijkstrasAlgorithmSpec.scala
+[debug] 	Invalidated direct: Set()
+[debug] Incrementally invalidated: Set()

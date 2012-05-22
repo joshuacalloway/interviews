@@ -1,0 +1,1 @@
+Implement the Dijkstras algorithm in Scala and use scalatest

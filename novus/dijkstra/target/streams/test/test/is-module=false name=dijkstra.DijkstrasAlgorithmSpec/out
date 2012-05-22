@@ -1,0 +1,3 @@
+[info] DijkstrasAlgorithmSpec:
+[info] - dijkstras shortest path from node0 to node 10
+[info] - dijkstras shortest path from node0 to node5 does not exist

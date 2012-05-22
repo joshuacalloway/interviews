@@ -1,0 +1,5 @@
+#External Dependencies
+#Mon Dec 19 18:30:46 CST 2011
+C\:\\dijkstra\\project\\boot\\scala-2.7.7\\org.scala-tools.sbt\\sbt\\0.7.4\\ivy_2.7.7-0.7.4.jar=DijkstraProject.scala
+C\:\\dijkstra\\project\\boot\\scala-2.7.7\\org.scala-tools.sbt\\sbt\\0.7.4\\sbt_2.7.7-0.7.4.jar=DijkstraProject.scala
+C\:\\dijkstra\\project\\boot\\scala-2.7.7\\lib\\scala-library.jar=DijkstraProject.scala
