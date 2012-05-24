@@ -29,13 +29,10 @@ protected class EquityDefinitionParserImpl(val delim: Char, val filePath: String
     val headers = headersArr.zipWithIndex.map{case(value, index) => (value.toLowerCase, index)}.toMap
     
     val normalizedHeaders = headers.map{case(value, index) => ( if (normalized.contains(value)) normalized(value) else value, index)}.toMap
-
     while (iter.hasNext) {
       ret.add(EquityDefinitionImpl(normalizedHeaders, checksum, iter.next)) 
     }
-//    ret.add(equity)
     src.close
     ret
   }
-
 }

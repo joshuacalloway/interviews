@@ -2,7 +2,10 @@
 package getco;
 import java.util.Collection;
 
-import getco.io.*;
+import getco.io.EquityTimeSeriesWriter;
+import getco.io.EquityDefinitionWriter;
+import getco.io.EquityTimeSeriesParser;
+import getco.io.EquityDefinitionParser;
 import getco.io.EquityWriterOrParserFactory;
 
 import getco.model.EquityDefinitionSet;
@@ -15,7 +18,6 @@ public class EquityMasterApplication
 {
   static final Logger log = LoggerFactory.getLogger(EquityMasterApplication.class);
 
-
   public static void main(String[] args) {
     log.info("EquityMasterApplication version 1.0");
 
@@ -27,20 +29,16 @@ public class EquityMasterApplication
     EquityDefinitionSet definitionSet = new EquityDefinitionSet();
     definitionSet.addAll(colA);
     definitionSet.addAll(colB);
-
     EquityDefinitionWriter equityWriter = EquityWriterOrParserFactory.getEquityDefinitionWriter(definitionSet, "equitydefinition.txt");
     equityWriter.writeFile();
 
-
     EquityTimeSeriesParser parserC = EquityWriterOrParserFactory.getEquityTimeSeriesParser(',', "/vendor_a_ts.txt");
     EquityTimeSeriesParser parserD = EquityWriterOrParserFactory.getEquityTimeSeriesParser('|', "/vendor_b_ts.txt");
-    
     Collection colC = parserC.parseFile();
     Collection colD = parserD.parseFile();
     EquityTimeSeriesSet timeSeriesSet = new EquityTimeSeriesSet();
     timeSeriesSet.addAll(colC);
     timeSeriesSet.addAll(colD);
-
     EquityTimeSeriesWriter equityTimeSeriesWriter = EquityWriterOrParserFactory.getEquityTimeSeriesWriter(timeSeriesSet, "equitytimeseries.txt");
     equityTimeSeriesWriter.writeFile();
   }

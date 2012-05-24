@@ -1,7 +1,7 @@
 package getco.model
 
-import scala.annotation.target.getter
 import scala.reflect.BeanProperty
+import org.slf4j.{Logger, LoggerFactory}
 
 protected object EquityDefinitionImpl extends EquityModelUtils {
 
@@ -48,12 +48,15 @@ protected class EquityDefinitionImpl(
   @BeanProperty var securityCategory: String
 ) extends EquityDefinition
 {
+  def log = LoggerFactory.getLogger(getClass)
 
   @Override def combineData(other: EquityDefinition): Boolean = {
     if (cusip != other.getCusip ||
         isin != other.getIsin ||
-        symbol != other.getSymbol) return false;
-
+        symbol != other.getSymbol) {
+      log.error("Unable to combine time series for " + cusip + " due to ["+cusip+"|"+isin+"symbol"+"] != [ "+other.getCusip+"|"+other.getIsin+"|"+other.getSymbol+"]")
+      return false;
+    }
     if (category == null) category = other.getCategory
     if (sector == null) sector = other.getSector
     if (group == null) group = other.getGroup

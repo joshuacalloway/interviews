@@ -1,6 +1,5 @@
 package getco.model
 
-import scala.annotation.target.getter
 import scala.reflect.BeanProperty
 import org.slf4j.{Logger, LoggerFactory}
 

@@ -8,8 +8,6 @@ import java.io._
 
 import org.slf4j.{Logger, LoggerFactory}
 
-
-
 protected class EquityDefinitionWriterImpl(val set: EquityDefinitionSet, val filePath: String) extends EquityDefinitionWriter
 {
   def log = LoggerFactory.getLogger(getClass)
@@ -23,7 +21,6 @@ protected class EquityDefinitionWriterImpl(val set: EquityDefinitionSet, val fil
     while (i.hasNext) {
       writer.println(toCommaDelimited(i.next.getValue))
     }
-    writer.println("after")
     writer.close
   }
 

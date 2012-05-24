@@ -4,7 +4,6 @@ import getco.model.EquityDefinitionSet;
 import getco.model.EquityTimeSeriesSet;
 
 public final class EquityWriterOrParserFactory {
-
   private EquityWriterOrParserFactory() {}
 
   public static EquityTimeSeriesWriter getEquityTimeSeriesWriter(final EquityTimeSeriesSet set, final String filePath) {
