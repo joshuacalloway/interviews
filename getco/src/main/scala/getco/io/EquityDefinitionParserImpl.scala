@@ -13,11 +13,12 @@ protected class EquityDefinitionParserImpl(val delim: Char, val filePath: String
 {
   def log = LoggerFactory.getLogger(getClass)
   val checksum = Map("cusip" -> (8, 1), "isin" -> (11, 1), "sedol" -> (7, 1))  
-  val normalized = Map("industry_subgroup" -> "subgroup", 
-                       "industry_group" -> "group",
-                       "industry_sector" -> "sector",
-                     "security_category" -> "category",
-                     "ticker" -> "symbol")
+  // val normalized = Map("industry_subgroup" -> "subgroup", 
+  //                      "industry_group" -> "group",
+  //                      "industry_sector" -> "sector",
+  //                    "security_category" -> "category",
+  //                    "ticker" -> "symbol")
+  val normalized = Map("ticker" -> "symbol")
   
   def parseFile(): Collection[EquityDefinition] = {
     log.info("parseFile version with delim " + delim + " on filePath " + filePath)

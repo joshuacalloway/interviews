@@ -2,10 +2,11 @@
 package getco;
 import java.util.Collection;
 
-import getco.io.EquityDefinitionIOFactory;
-import getco.io.EquityDefinitionParser;
-import getco.io.EquityDefinitionWriter;
+import getco.io.*;
+import getco.io.EquityWriterOrParserFactory;
+
 import getco.model.EquityDefinitionSet;
+import getco.model.EquityTimeSeriesSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,17 +19,34 @@ public class EquityMasterApplication
   public static void main(String[] args) {
     log.info("EquityMasterApplication version 1.0");
 
-    EquityDefinitionParser parserA = EquityDefinitionIOFactory.getEquityDefinitionParser(',', "/vendor_a_eq.txt");
-    EquityDefinitionParser parserB = EquityDefinitionIOFactory.getEquityDefinitionParser('|', "/vendor_b_eq.txt");
+    EquityDefinitionParser parserA = EquityWriterOrParserFactory.getEquityDefinitionParser(',', "/vendor_a_eq.txt");
+    EquityDefinitionParser parserB = EquityWriterOrParserFactory.getEquityDefinitionParser('|', "/vendor_b_eq.txt");
     
     Collection colA = parserA.parseFile();
     Collection colB = parserB.parseFile();
-    EquityDefinitionSet set = new EquityDefinitionSet();
-    set.addAll(colA);
-    set.addAll(colB);
+    EquityDefinitionSet definitionSet = new EquityDefinitionSet();
+    definitionSet.addAll(colA);
+    definitionSet.addAll(colB);
 
-    EquityDefinitionWriter equityWriter = EquityDefinitionIOFactory.getEquityDefinitionWriter(set, "equitydefinition.txt");
+    EquityDefinitionWriter equityWriter = EquityWriterOrParserFactory.getEquityDefinitionWriter(definitionSet, "equitydefinition.txt");
     equityWriter.writeFile();
+
+
+    EquityTimeSeriesParser parserC = EquityWriterOrParserFactory.getEquityTimeSeriesParser(',', "/vendor_a_ts.txt");
+    EquityTimeSeriesParser parserD = EquityWriterOrParserFactory.getEquityTimeSeriesParser('|', "/vendor_b_ts.txt");
+    
+    Collection colC = parserC.parseFile();
+    Collection colD = parserD.parseFile();
+    log.info("colC.size() : " + colC.size());
+
+    EquityTimeSeriesSet timeSeriesSet = new EquityTimeSeriesSet();
+    timeSeriesSet.addAll(colC);
+    timeSeriesSet.addAll(colD);
+
+    log.info("timeSeriesSet.size() : " + timeSeriesSet.size());
+    EquityTimeSeriesWriter equityTimeSeriesWriter = EquityWriterOrParserFactory.getEquityTimeSeriesWriter(timeSeriesSet, "equitytimeseries.txt");
+    equityTimeSeriesWriter.writeFile();
+
 
   }
 

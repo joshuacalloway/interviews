@@ -2,8 +2,8 @@ package getco.io;
 
 import java.util.Collection;
 
-public abstract class EquityDefinitionWriter
+public abstract class EquityTimeSeriesWriter
 {
-  protected EquityDefinitionWriter() {}
+  protected EquityTimeSeriesWriter() {}
   public abstract void writeFile();
 }
