@@ -307,4 +307,3 @@ TradeDate|Cusip|Symbol|OpenPrice|ClosePrice|Bid|Ask|Volume|VolumePre|VolumePost
 2011-11-15|G5876H10|MRVL|14.79|15.08|15.06|15.07|12024651|null|null
 2011-11-15|G7945M10|STX|17.2|17.52|17.52|17.53|8838470|null|null
 2011-11-15|N0705918|ASML|39.96|40.46|40.45|40.46|1389422|null|null
-after
