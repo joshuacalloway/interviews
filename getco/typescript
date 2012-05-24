@@ -1,0 +1,41 @@
+Script started on Thu 24 May 2012 04:01:37 PM CDT
+jpc$ sbt
+[info] Loading project definition from /home/jpc/interviews/getco/project
+[info] Set current project to getco (in build file:/home/jpc/interviews/getco/)
+> clean
+[success] Total time: 0 s, completed May 24, 2012 4:01:55 PM
+> compile
+[info] Updating {file:/home/jpc/interviews/getco/}default-7b5570...
+[info] Resolving org.scala-lang#scala-library;2.9.2 ...
+[info] Resolving ch.qos.logback#logback-classic;1.0.3 ...
+[info] Resolving ch.qos.logback#logback-core;1.0.3 ...
+[info] Resolving org.slf4j#slf4j-api;1.6.4 ...
+[info] Resolving org.scalatest#scalatest_2.9.2;1.6.1 ...
+[info] Done updating.
+[info] Compiling 7 Scala sources and 10 Java sources to /home/jpc/interviews/getco/target/scala-2.9.2/classes...
+[warn] Note: /home/jpc/interviews/getco/src/main/java/getco/EquityMasterApplication.java uses unchecked or unsafe operations.
+[warn] Note: Recompile with -Xlint:unchecked for details.
+[success] Total time: 11 s, completed May 24, 2012 4:02:08 PM
+> test
+[info] Compiling 1 Scala source to /home/jpc/interviews/getco/target/scala-2.9.2/test-classes...
+[warn] there were 2 deprecation warnings; re-run with -deprecation for details
+[warn] one warning found
+[info] SanityTestSuite:
+[info] - Simple Sanity Test for EquityModelUtils.parseLong
+[info] - Simple Sanity Test for EquityModelUtils.parseDouble
+[info] - Simple Sanity Test on vendor A Time series
+[info] - Simple Sanity Test on vendor B Time series
+[info] - Simple Sanity Test on vendor A Equity Definition
+[info] - Simple Sanity Test on vendor B Equity Definition
+[info] - Simple combining of EquitieDefinitions from vendor B and Vendor A
+[info] - Simple combining of EquitieTimeSeries from vendor B and Vendor A
+[info] Passed: : Total 8, Failed 0, Errors 0, Passed 8, Skipped 0
+[success] Total time: 4 s, completed May 24, 2012 4:02:21 PM
+> run
+[info] Running getco.EquityMasterApplication 
+[success] Total time: 0 s, completed May 24, 2012 4:02:23 PM
+> exit
+jpc$ exit
+exit
+
+Script done on Thu 24 May 2012 04:02:28 PM CDT

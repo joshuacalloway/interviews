@@ -6,7 +6,6 @@ import java.util.Collection
 import java.util.ArrayList
 
 import org.slf4j.{Logger, LoggerFactory}
-
 import scala.io.Source
 
 protected class EquityDefinitionParserImpl(val delim: Char, val filePath: String) extends EquityDefinitionParser

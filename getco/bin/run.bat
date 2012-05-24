@@ -1,0 +1,1 @@
+java -jar getco-complete.jar
