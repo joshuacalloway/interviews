@@ -4,7 +4,7 @@ cusip|isin|common_number|symbol|country|security_category|exchange|sector|group|
 45920010|US4592001014|009703799|IBM|US|Common|NYSE|Tech.|Computers|Computers
 08467010|US0846701086|009987827|BRKA|US|Series|NYSE|Financial|Insurance|Reinsurance
 08467070|US0846707026|048044743|BRKB|US|Series|NYSE|Financial|Insurance|Reinsurance
-68389X10|US68389X1054|009716173|ORCL|US|Common|XNGS|Tech.|Software| Enterprise Software/Serv
+68389X10|US68389X1054|009716173|ORCL|US|Common|XNGS|Tech.|Software| Enterprise Software/Serv1
 45814010|US4581401001|009702920|INTC|US|Common|XNGS|Tech.|Semiconductors|Electronic Compo-Semicon
 46625H10|US46625H1005|012271654|JPM|US|Common|NYSE|Financial|Diversified Finan Serv|Finance-Invest Bnkr/Brkr
 46625H10|US46625H1005|012271654|JPM|US|Common|NYSE|Financial|Banks|Diversified Banking Inst
