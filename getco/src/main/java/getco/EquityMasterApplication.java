@@ -37,17 +37,11 @@ public class EquityMasterApplication
     
     Collection colC = parserC.parseFile();
     Collection colD = parserD.parseFile();
-    log.info("colC.size() : " + colC.size());
-
     EquityTimeSeriesSet timeSeriesSet = new EquityTimeSeriesSet();
     timeSeriesSet.addAll(colC);
     timeSeriesSet.addAll(colD);
 
-    log.info("timeSeriesSet.size() : " + timeSeriesSet.size());
     EquityTimeSeriesWriter equityTimeSeriesWriter = EquityWriterOrParserFactory.getEquityTimeSeriesWriter(timeSeriesSet, "equitytimeseries.txt");
     equityTimeSeriesWriter.writeFile();
-
-
   }
-
 }

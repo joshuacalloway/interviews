@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+  <appender name="STDOUT"
+	    class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <pattern>%-4relative [%thread] %-5level %class - %msg%n</pattern>
+    </layout>
+  </appender>
+
+  <appender name="ERROR_LOG"
+	    class="ch.qos.logback.core.FileAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <pattern>%-4relative [%thread] %-5level %class - %msg%n</pattern>
+    </layout>
+    <File>application_errors.log</File>
+  </appender>
+    
+  <root>
+    <level value="info" />
+    <appender-ref ref="ERROR_LOG" />
+  </root>
+</configuration>
