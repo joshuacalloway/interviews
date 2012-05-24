@@ -23,7 +23,6 @@ protected class EquityTimeSeriesWriterImpl(val set: EquityTimeSeriesSet, val fil
     while (i.hasNext) {
       writer.println(toCommaDelimited(i.next.getValue))
     }
-    writer.println("after")
     writer.close
   }
 

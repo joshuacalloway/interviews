@@ -10,7 +10,7 @@
   <appender name="ERROR_LOG"
 	    class="ch.qos.logback.core.FileAppender">
     <layout class="ch.qos.logback.classic.PatternLayout">
-      <pattern>%-4relative [%thread] %-5level %class - %msg%n</pattern>
+      <pattern>%d %-5level %class - %msg%n</pattern>
     </layout>
     <File>application_errors.log</File>
   </appender>

@@ -33,4 +33,3 @@ UBS|H8923133|null|025989457|UBS|US|null|NYSE|null|Financial|Diversified Finan Se
 WIT|97651M10|2646123|012147384|WIT|US|Common|NYSE|XNYS|Tech.|Software| Applications Software
 WMT|93114210|2936921|null|WMT|null|Common|null|XNYS|null|null|null
 YUM|98849810|2098876|null|YUM|null|Common|null|XNYS|null|null|null
-after

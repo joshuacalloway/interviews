@@ -2,6 +2,7 @@ package getco.model
 
 import scala.reflect.BeanProperty
 import org.slf4j.{Logger, LoggerFactory}
+import java.lang.{Double, Long}
 
 protected object EquityTimeSeriesImpl extends EquityModelUtils {
 
@@ -17,13 +18,13 @@ protected object EquityTimeSeriesImpl extends EquityModelUtils {
       }
     }
     val tradeDate = getValueOrNull(headers, checksum, values, "trade_date")
-    val openPrice = getValueOrNull(headers, checksum, values, "open_price")
-    val closePrice = getValueOrNull(headers, checksum, values, "close_price")
-    val volume = getValueOrNull(headers, checksum, values, "volume")
-    val bid  = getValueOrNull(headers, checksum, values, "bid")
-    val ask  = getValueOrNull(headers, checksum, values, "ask")
-    val volumePre = getValueOrNull(headers, checksum, values, "volumePre")
-    val volumePost = getValueOrNull(headers, checksum, values, "volumePost")
+    val openPrice = parseDouble(getValueOrNull(headers, checksum, values, "open_price"))
+    val closePrice = parseDouble(getValueOrNull(headers, checksum, values, "close_price"))
+    val volume = parseLong(getValueOrNull(headers, checksum, values, "volume"))
+    val bid  = parseDouble(getValueOrNull(headers, checksum, values, "bid"))
+    val ask  = parseDouble(getValueOrNull(headers, checksum, values, "ask"))
+    val volumePre = parseLong(getValueOrNull(headers, checksum, values, "volumePre"))
+    val volumePost = parseLong(getValueOrNull(headers, checksum, values, "volumePost"))
     
     new EquityTimeSeriesImpl(cusip,symbol,tradeDate,openPrice,closePrice,volume,bid,ask,volumePre,volumePost)
   }
@@ -33,13 +34,13 @@ protected class EquityTimeSeriesImpl(
   @BeanProperty val cusip: String,
   @BeanProperty var symbol: String,
   @BeanProperty val tradeDate: String,
-  @BeanProperty val openPrice: String,
-  @BeanProperty val closePrice: String,
-  @BeanProperty val volume: String,
-  @BeanProperty var bid: String,
-  @BeanProperty var ask: String,
-  @BeanProperty var volumePre: String,
-  @BeanProperty var volumePost: String
+  @BeanProperty val openPrice: java.lang.Double,
+  @BeanProperty val closePrice: java.lang.Double,
+  @BeanProperty val volume: java.lang.Long,
+  @BeanProperty var bid: java.lang.Double,
+  @BeanProperty var ask: java.lang.Double,
+  @BeanProperty var volumePre: java.lang.Long,
+  @BeanProperty var volumePost: java.lang.Long
 ) extends EquityTimeSeries
 {
   def log = LoggerFactory.getLogger(getClass)
@@ -55,8 +56,8 @@ protected class EquityTimeSeriesImpl(
       return false;
     }
     if (symbol == null) symbol = other.getSymbol
-    if (bid == null) bid = other.getBid
-    if (ask == null) ask = other.getAsk
+    if (bid == 0) bid = other.getBid
+    if (ask == 0) ask = other.getAsk
     if (volumePre == null) volumePre = other.getVolumePre
     if (volumePost == null) volumePost = other.getVolumePost
     true

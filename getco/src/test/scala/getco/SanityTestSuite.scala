@@ -10,6 +10,32 @@ import getco.model._
 
 class SanityTestSuite extends FunSuite {
 
+  test("Simple Sanity Test for EquityModelUtils.parseLong") {
+    object Util extends EquityModelUtils {}
+    assert(null == Util.parseLong(null))
+    assert(null == Util.parseLong(""))
+    assert(1000 == Util.parseLong("1000"))
+    assert(1000 == Util.parseLong("1000.0"))
+    assert(1000 == Util.parseLong("1000.00000"))
+    assert(1000 != Util.parseLong("1000.00001"))
+    assert(null == Util.parseLong("1000.00001"))
+    assert(null == Util.parseLong("AAPL"))
+  }
+
+  test("Simple Sanity Test for EquityModelUtils.parseDouble") {
+    object Util extends EquityModelUtils {}
+    assert(null == Util.parseDouble(null))
+    assert(null == Util.parseDouble(""))
+    assert(1000 == Util.parseDouble("1000"))
+    assert(1000 == Util.parseDouble("1000.0"))
+    assert(1000 == Util.parseDouble("1000.00000"))
+    assert(1000 != Util.parseDouble("1000.00001"))
+    assert(0.65 == Util.parseDouble("000.65"))
+    assert(0.65 == Util.parseDouble(".65"))
+    assert(1000.00001 == Util.parseDouble("1000.00001"))
+    assert(null == Util.parseDouble("AAPL"))
+  }
+
 
   test("Simple Sanity Test on vendor A Time series") {
     val parser = getco.io.EquityWriterOrParserFactory.getEquityTimeSeriesParser(',', "/vendor_a_ts.txt")
@@ -19,9 +45,9 @@ class SanityTestSuite extends FunSuite {
 
     assert("03783310" == first.getCusip)
     assert("2011-11-01" == first.getTradeDate)
-    assert("397.410000" == first.getOpenPrice)
-    assert("396.510000" == first.getClosePrice)
-    assert("18992411" == first.getVolume)
+    assert(397.41 == first.getOpenPrice)
+    assert(396.51 == first.getClosePrice)
+    assert(18992411 == first.getVolume)
   }
 
   test("Simple Sanity Test on vendor B Time series") {
@@ -30,15 +56,13 @@ class SanityTestSuite extends FunSuite {
     val i = col.iterator()
     val first = i.next
 
-//AAPL:037833100|2011-11-01|397.410000|396.510000|396.500000|396.510000|166729.000000|310857.000000|18514825.000000
-    println("first.getCusip :" + first.getCusip)
-    println("first.getSymbol : "+ first.getSymbol)
+    //AAPL:037833100|2011-11-01|397.410000|396.510000|396.500000|396.510000|166729.000000|310857.000000|18514825.000000
     assert("03783310" == first.getCusip)
     assert("AAPL" == first.getSymbol)
     assert("2011-11-01" == first.getTradeDate)
-    assert("397.410000" == first.getOpenPrice)
-    assert("396.510000" == first.getClosePrice)
-    assert("18514825.000000" == first.getVolume)
+    assert(397.41 == first.getOpenPrice)
+    assert(396.51 == first.getClosePrice)
+    assert(18514825 == first.getVolume)
   }
 
   test("Simple Sanity Test on vendor A Equity Definition") {
@@ -97,7 +121,6 @@ class SanityTestSuite extends FunSuite {
     val set = new EquityDefinitionSet()
     set.putAll(convertToMap1(colA))
     set.putAll(convertToMap1(colB))
-    println("set.size() : " + set.size())
     assert(set.size == 34)
 
     val aapl = set.get("AAPL")
@@ -125,27 +148,21 @@ class SanityTestSuite extends FunSuite {
     val set = new EquityTimeSeriesSet()
     set.putAll(convertToMap2(colA))
     set.putAll(convertToMap2(colB))
-    println("set.size() : " + set.size())
-    assert(set.size == 285)
+    //println("set.size : " + set.size)
+    assert(set.size == 308)
 
     val aapl = set.get("date: 2011-11-01, cusip: 03783310")
-
-    println("aapl.getCusip :" + aapl.getCusip)
-    println("aapl.getSymbol : "+ aapl.getSymbol)
     assert("03783310" == aapl.getCusip)
-    assert(null == aapl.getSymbol)
+    assert("AAPL" == aapl.getSymbol)
     assert("2011-11-01" == aapl.getTradeDate)
-    assert("397.410000" == aapl.getOpenPrice)
-    assert("396.510000" == aapl.getClosePrice)
-    //assert("18514825.000000" == aapl.getVolume)
-    assert("18992411" == aapl.getVolume)
-
+    assert(397.41 == aapl.getOpenPrice)
+    assert(396.51 == aapl.getClosePrice)
+    assert(18514825 == aapl.getVolume)
   }
 
   def convertToMap2(col : Collection[EquityTimeSeries]) : java.util.TreeMap[String, EquityTimeSeries] = {
     val m = new java.util.TreeMap[String,EquityTimeSeries]()
     col.foreach { i => {
-//      println("putting key: " + (i.getTradeDate() + i.getCusip()))
       m.put("date: "+ i.getTradeDate() + ", cusip: " + i.getCusip(), i) 
     }
                }
@@ -158,3 +175,4 @@ class SanityTestSuite extends FunSuite {
     m
   }
 }
+               
