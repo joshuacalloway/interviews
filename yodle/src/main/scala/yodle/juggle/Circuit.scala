@@ -8,6 +8,8 @@ package yodle.juggle
 case class Circuit(val name:String, val hand:Int, val endurance:Int, val pizzazz:Int)
 {
 
+  // . product
+  def *(that:Juggler): Int = hand * that.hand + endurance * that.endurance + pizzazz * that.pizzazz
 }
 
 object Circuit {
