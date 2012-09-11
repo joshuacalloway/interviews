@@ -2,7 +2,7 @@
 package chess
 
 
-case class Game(board : Board, turn: Color.ColorType = Color.white) {
+case class Game(board : Board, turn: Color = white) {
 }
 
 object Game {

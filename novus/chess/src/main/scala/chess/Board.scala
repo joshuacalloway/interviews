@@ -11,6 +11,8 @@ case class Board(pieces: List[Piece]) {
 object Board {
 
   def createInitial = {
-    
+      val pieces = List[Piece](
+			       Rook(Position('a',1),white)
+      )
   }
 }
