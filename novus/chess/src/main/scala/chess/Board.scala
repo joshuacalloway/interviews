@@ -6,19 +6,25 @@ case class Board(pieces: List[Piece]) {
 
   def getPieceAtPosition(position: Position) = pieces.find{ p => p.position == position }
 
+  def isPositionEmpty(positionOption: Option[Position]) = positionOption match {
+    case Some(position) => pieces.find{ p => p.position == position }.isEmpty
+    case _ => false
+  }
+
   def isPositionEmpty(position: Position) = {
     pieces.find{ p => p.position == position }.isEmpty
   }
   def isPositionEmpty(positon: Position, steps: List[ (Position) => Option[Position] ]): Boolean = {
     false
   }
-  def getPosition(positon: Position, steps: List[ (Position) => Option[Position] ]): Position = {
-    Position(A, one)
+  def emptyPositions(position: Position, steps: List[ (Position) => Option[Position] ]): List[Position] = steps match {
+    case Nil => Nil
+    case head :: tail if isPositionEmpty(head(position)) => List(head(position).get) ::: emptyPositions(head(position).get, steps)
   }
 
-  def emptyAdjacentPositions(position: Position, operation: (Position) => Option[Position]): List[Position] = operation(position) match {
+  def emptyPositions(position: Position, operation: (Position) => Option[Position]): List[Position] = operation(position) match {
     case None => return Nil
-    case Some(adjacent) if isPositionEmpty(adjacent) => List(adjacent) ::: emptyAdjacentPositions(adjacent, operation)
+    case Some(adjacent) if isPositionEmpty(adjacent) => List(adjacent) ::: emptyPositions(adjacent, operation)
     case _ => return Nil
   }
 
