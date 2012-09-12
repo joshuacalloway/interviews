@@ -34,9 +34,17 @@ object six extends Rank("6",6)
 object seven extends Rank("7",7)
 object eight extends Rank("8",8)
 
-/*
-object Rank extends Enumeration {
-  type RankType = Value
-  val one, two, three, four, five, six, seven, eight = Value
+object Rank
+{
+  def apply(c: Int) = c match {
+    case 1 => one
+    case 2 => two
+    case 3 => three
+    case 4 => four
+    case 5 => five
+    case 6 => six
+    case 7 => seven
+    case 8 => eight
+    case _ => throw new IllegalArgumentException("Undefined rank for " + c)    
+  }
 }
-*/

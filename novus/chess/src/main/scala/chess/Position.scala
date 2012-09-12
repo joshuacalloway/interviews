@@ -4,7 +4,7 @@ package chess
 // http://en.wikipedia.org/wiki/Chessboard
 
 case class Position(file: File, rank: Rank) {
-
+  override def toString = "Position("+file.name+","+rank.name+")"
   def < (other: Position) = if (other.rank.value + other.file.value > rank.value + file.value) true else false
 
   def adjacent(other: Position):Boolean = {
@@ -57,7 +57,7 @@ case class Position(file: File, rank: Rank) {
 
 object Position {
   def apply(file: Char, rank: Int) = { 
-    new Position(a,one)
+    new Position(File(file),Rank(rank))
   }
 
   def plusFile(position: Position): Option[Position] = position.plusFile
