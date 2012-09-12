@@ -1,3 +1,3 @@
 package chess
 
-case class Movement(piece: Piece, start: Position, end: Position)
+case class Movement(piece: Piece, steps: List[Position])

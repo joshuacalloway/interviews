@@ -2,5 +2,5 @@ package chess
 
 trait Moveable {
 
-  def possiblePositions(start: Position, board: Board) : List[Position]      
+  def possiblePositions(board: Board) : List[Position]      
 }
