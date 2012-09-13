@@ -1,7 +1,6 @@
 package chess
 
-case class Pawn(var position: Position, color: Color) extends Piece {
-  override def name = "Pawn"
+case class Pawn(var p: Position, c: Color) extends Piece("Pawn", c, p) {
 
   private def neverMoved: Boolean = (position.rank.value, color) match {
     case (2, white) => true
@@ -29,9 +28,13 @@ case class Pawn(var position: Position, color: Color) extends Piece {
 
   private def killPositions(board: Board, p: Position): List[Position] = List(killPosition1(board, p), killPosition2(board,p)).filter { X => !X.isEmpty }.map { Y => Y.get }
 
+//  private def killPositions(board: Board, p: Position): List[Position] = List(killPosition1(board, p), killPosition2(board,p)).filter { X => !X.isEmpty }.map { Y => Y.get }
+
+
+
   def possiblePositions(board: Board) : List[Position] = (neverMoved, onePositionForward(position)) match {
     case (false, Some(forwardPos)) if board.isPositionEmpty(forwardPos)  => List(forwardPos) ::: killPositions(board, position) 
    case (true, Some(forwardPos))  if board.isPositionEmpty(forwardPos)  => List(forwardPos) ::: killPositions(board, position) ::: (if (board.isPositionEmpty(onePositionForward(forwardPos) )) List(onePositionForward(forwardPos).get) else Nil)
-    case (_,None) => killPositions(board, position)
+    case _ => killPositions(board, position)
   }
 }

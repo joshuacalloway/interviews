@@ -1,7 +1,6 @@
 package chess
 
-case class Queen(var position: Position, color: Color) extends Piece {
-  override def name = "Queen"
+case class Queen(var p: Position, c: Color) extends Piece("Queen", c, p) {
 
   def possiblePositions(board: Board) : List[Position] = {
     val sameDiagonal = board.allPositionsOnDiagonal(position)

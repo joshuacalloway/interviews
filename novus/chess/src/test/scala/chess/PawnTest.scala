@@ -19,6 +19,18 @@ class PawnTest extends FunSuite {
     val expected = List(Position(E, three), Position(E,four), Position(F,three))
         
     assert(positions.sort((e1,e2) => (e1 < e2)) == expected.sort((e1,e2) => (e1 < e2)))
+  }
+  test("possiblePositions for White Pawn on E4. Black Pawn on E5") {
+    val posE4 = Position(E, four)
+    val posE5 = Position(E, five)
+    val whitePawn = Pawn(posE4, white)
+    val blackPawn = Pawn(posE5, black)
+    val pieces = List(whitePawn, blackPawn)
+    val board = Board(pieces)
 
+    val positions = whitePawn.possiblePositions(board)
+    val expected = List[Position]()
+        
+    assert(positions.sort((e1,e2) => (e1 < e2)) == expected.sort((e1,e2) => (e1 < e2)))
   }
 }
