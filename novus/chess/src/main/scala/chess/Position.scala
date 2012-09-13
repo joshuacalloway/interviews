@@ -8,7 +8,7 @@ case class Position(file: File, rank: Rank) {
   def color = {  if ((file.value + rank.value) % 2 == 0 ) black else white }
   override def toString = "Position("+file.name+","+rank.name+")"
 
-  def < (other: Position) = if (other.rank.value + other.file.value > rank.value + file.value) true else false
+  def < (other: Position) = if (2*other.rank.value + other.file.value > 2*rank.value + file.value) true else false
 
   def adjacent(other: Position):Boolean = {
     if ((other.rank == rank.plusOne || other.rank == rank.minusOne) &&
@@ -59,6 +59,10 @@ case class Position(file: File, rank: Rank) {
 }
 
 object Position {
+  def apply(file: Char, rank: Rank) = { 
+    new Position(File(file),rank)
+  }
+
   def apply(file: Char, rank: Int) = { 
     new Position(File(file),Rank(rank))
   }
