@@ -1,6 +1,7 @@
 package chess
 
 case class Pawn(var position: Position, color: Color) extends Piece {
+  override def name = "Pawn"
 
   private def neverMoved: Boolean = (position.rank.value, color) match {
     case (2, white) => true

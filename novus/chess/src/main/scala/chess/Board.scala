@@ -1,7 +1,6 @@
 package chess
 
 
-//case class Board(pieces: List[Piece], positions: List[Position]) {
 case class Board(pieces: List[Piece]) {
 
   def findKing( color: Color) = pieces.find{ p => p.getClass() == classOf[King] && p.color == color } match {

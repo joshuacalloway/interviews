@@ -1,6 +1,7 @@
 package chess
 
 case class Knight(var position: Position, color: Color) extends Piece {
+  override def name = "Knight"
 
   def possiblePositions(board: Board) : List[Position] = {
     val positions = List(

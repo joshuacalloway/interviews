@@ -1,6 +1,7 @@
 package chess
 
 case class Rook(var position: Position, color: Color) extends Piece {
+  override def name = "Rook"
 
   def possiblePositions(board: Board) : List[Position] = {
     val sameRank = board.allPositionsByRank(position.rank)
