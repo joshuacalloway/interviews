@@ -4,6 +4,22 @@ package chess
 //case class Board(pieces: List[Piece], positions: List[Position]) {
 case class Board(pieces: List[Piece]) {
 
+  def findKing( color: Color) = pieces.find{ p => p.getClass() == classOf[King] && p.color == color } match {
+    case Some(king) => Option(king)
+    case _ => None
+  }
+
+  def findKingPosition( color: Color) = findKing(color) match {
+    case Some(king) => Option(king.position)
+    case _ => None
+  }
+
+
+  def findKingPosition2( color: Color) = pieces.find{ p => p.getClass() == classOf[King] && p.color == color } match {
+    case Some(king) => Option(king.position)
+    case _ => None
+  }
+
   def isPositionEmpty(positionOption: Option[Position]) = positionOption match {
     case Some(position) => pieces.find{ p => p.position == position }.isEmpty
     case _ => false
@@ -75,10 +91,6 @@ case class Board(pieces: List[Piece]) {
 object Board {
 
 
-  def createEmptyBoard = {
-  
-  }
-
   def createInitial = {
       val pieces = List[Piece](
 			       Rook(Position(A,1),white),
@@ -117,7 +129,7 @@ object Board {
                                Pawn(Position(F,7),black),
                                Pawn(Position(G,7),black),
                                Pawn(Position(H,7),black)
-
       )
+      new Board(pieces) 
   }
 }
