@@ -5,11 +5,13 @@ import scala.swing._
 object GameGui extends SimpleSwingApplication {
 
   val checkStatus = new Label("Game is in progress")
+
   val turnLabel = new TextField {
     text = "white"
     columns = 5
     editable = false
   }
+
   val game = Game(Board.createInitial)
   val chessBoardPanel = new ChessBoardPanel(game)
 
@@ -24,5 +26,6 @@ object GameGui extends SimpleSwingApplication {
     turnLabel.text = game.turn.name
     if (game.isCheckMate) checkStatus.text = "Check Mate, " + Color.other( game.turn ) + " won the game." else if (game.isCheck) checkStatus.text = "Check of " + game.turn.name + " King." else checkStatus.text = "Game is in progress"
   }
+
   def turn = game.turn
 }

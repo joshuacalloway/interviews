@@ -4,9 +4,7 @@ package chess
 
 case class Game(board : Board, var turn: Color = white) {
 
-  def nextTurn = {
-    turn = Color.other(turn)
-  }
+  def nextTurn = turn = Color.other(turn)
 
   def isCheck = if (board.pieces.filter { X => X.color == Color.other(turn) }.map { Y => Y.possiblePositions(board) }.flatten.filter { Z => Z == board.findKingPosition( turn ).get }.size > 0) true else false 
  

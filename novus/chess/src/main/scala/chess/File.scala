@@ -34,8 +34,21 @@ object F extends File("F",6)
 object G extends File("G",7)
 object H extends File("H",8)
 
+object NULL_FILE extends File("X", -1)
 object File
 {
+  def apply(v: Int) = v match {
+    case 1 => A
+    case 2 => B
+    case 3 => C
+    case 4 => D
+    case 5 => E
+    case 6 => F
+    case 7 => G
+    case 8 => H    
+    case _ => NULL_FILE
+  }
+
   def apply(c: Char) = c match {
     case 'A' => A
     case 'B' => B

@@ -2,7 +2,7 @@ package chess
 
 case class Knight(var p: Position, c: Color) extends Piece("Knight", c, p) {
 
-  def possiblePositions(board: Board) : List[Position] = {
+  def possiblePositions(board: Board) = {
     val positions = List(
       board.jumpToPosition(position, List( Position.plusRank, Position.plusRank, Position.plusFile)), 
       board.jumpToPosition(position, List( Position.plusRank, Position.plusRank, Position.minusFile)), 
