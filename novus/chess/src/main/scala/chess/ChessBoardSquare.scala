@@ -11,13 +11,11 @@ case class ChessBoardSquare(parent : ChessBoardPanel, position: Position, square
     text = getButtonText
     foreground = getAwtPieceColor
   }
+
   listenTo(button)
   reactions += {
     case ButtonClicked(b) => {
       if (piece != null && piece.color == parent.game.turn) {
-        println("piece: " + piece)
-        println("1. parent.game.turn " + parent.game.turn.toString())
-
         val possiblePositions = piece.possiblePositions(parent.game.board)
         parent.squares.foreach { sq => sq.unselect }
         select
@@ -25,8 +23,6 @@ case class ChessBoardSquare(parent : ChessBoardPanel, position: Position, square
       } else if (selected) {
         val selPieceSquare = parent.squares.filter { Y => Y.selected == true && Y.piece != null && Y.piece.color == parent.game.turn }.head
         val selPiece = selPieceSquare.piece
-        println("selPiece : " + selPiece)
-        println("2. parent.game.turn " + parent.game.turn.toString())
         val oldPos = selPiece.position
         if (parent.game.move(selPiece, position).isCheck) {
           parent.game.move(selPiece, oldPos)
@@ -38,7 +34,6 @@ case class ChessBoardSquare(parent : ChessBoardPanel, position: Position, square
           selPieceSquare.piece = null
           selPieceSquare.refresh
           parent.squares.foreach { sq => sq.unselect }
-       // parent.game.nextTurn
           GameGui.nextTurn
         }
       } else {
@@ -72,7 +67,13 @@ case class ChessBoardSquare(parent : ChessBoardPanel, position: Position, square
              
   def getAwtSquareColor = if (squareColor == white) java.awt.Color.lightGray else java.awt.Color.darkGray
 
+  def removeExistingPiece(p: Piece) {
+    val newPieces = parent.game.board.pieces.filter(X => X != p)
+    parent.game.board.pieces = newPieces
+  }
+
   def setPiece(newPiece: Piece) = {
+    removeExistingPiece(piece)
     piece = newPiece
     button.text = getButtonText
     button.foreground = getAwtPieceColor

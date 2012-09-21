@@ -42,6 +42,6 @@ class GameTest extends FunSuite {
 
     val board = Board(List(blackKing, whiteKing,whiteRook1, whiteRook2))
     val game = Game(board, black)
-    assert(game.isCheckMate)
+    assert(!game.isCheckMate)
   }
 }

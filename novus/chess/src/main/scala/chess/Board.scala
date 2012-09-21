@@ -1,7 +1,7 @@
 package chess
 
 
-case class Board(pieces: List[Piece]) {
+case class Board(var pieces: List[Piece]) {
 
   def findKing( color: Color) = pieces.find{ p => p.getClass() == classOf[King] && p.color == color } match {
     case Some(king) => Option(king)
@@ -18,6 +18,8 @@ case class Board(pieces: List[Piece]) {
     case _ => false
   }
 
+  def isPositionOccupied(position: Position) = !isPositionEmpty(position)
+
   def isPositionOccupied(positionOption: Option[Position]) = !isPositionEmpty(positionOption)
 
   def isPositionEmpty(position: Position) = {
@@ -26,17 +28,16 @@ case class Board(pieces: List[Piece]) {
 
   def getPieceAtPosition(position: Position) = pieces.find{ p => p.position == position }
 
+  def isPositionOccupied(position: Position, color: Color) = getPieceAtPosition(position) match {
+    case Some(piece) if piece.color == color => true
+    case _ => false
+  }
 
   def isPositionOccupied(position: Option[Position], color: Color): Boolean = position match {
     case Some(pos) => isPositionOccupied(pos, color)
     case _ => false
   }
-  
-  def isPositionOccupied(position: Position, color: Color) = getPieceAtPosition(position) match {
-    case Some(piece) if piece.color == color => true
-    case _ => false
-  }
-  
+    
   // for Knights
   def jumpToPosition(start: Position, steps: List[ (Position) => Option[Position] ]): Option[Position] = steps match {
     case Nil => Some(start)
