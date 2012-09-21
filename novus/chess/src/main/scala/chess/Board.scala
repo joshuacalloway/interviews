@@ -13,18 +13,12 @@ case class Board(pieces: List[Piece]) {
     case _ => None
   }
 
-
-  def findKingPosition2( color: Color) = pieces.find{ p => p.getClass() == classOf[King] && p.color == color } match {
-    case Some(king) => Option(king.position)
-    case _ => None
-  }
-
   def isPositionEmpty(positionOption: Option[Position]) = positionOption match {
     case Some(position) => pieces.find{ p => p.position == position }.isEmpty
     case _ => false
   }
 
-    def isPositionOccupied(positionOption: Option[Position]) = !isPositionEmpty(positionOption)
+  def isPositionOccupied(positionOption: Option[Position]) = !isPositionEmpty(positionOption)
 
   def isPositionEmpty(position: Position) = {
     pieces.find{ p => p.position == position }.isEmpty
@@ -70,20 +64,20 @@ case class Board(pieces: List[Piece]) {
     case Some(pos) => List(pos) ::: allPositionsOnDiagonal4(pos)
     case _ => Nil
   } 
-  private def allPositionsOnDiagonal3(position: Position): List[Position] = position.minusRankminusFile match {
+  private def allPositionsOnDiagonal3(position: Position):List[Position] = position.minusRankminusFile match {
     case Some(pos) => List(pos) ::: allPositionsOnDiagonal3(pos)
     case _ => Nil
   } 
   
   
-  def allPositionsOnDiagonal(position: Position): List[Position] = {
+  def allPositionsOnDiagonal(position: Position) = {
     List(position) ::: allPositionsOnDiagonal1(position) ::: allPositionsOnDiagonal2(position) ::: allPositionsOnDiagonal3(position) ::: allPositionsOnDiagonal4(position)
 
   }
 
-  def allPositionsByRank(rank: Rank): List[Position] = List(Position('A',rank), Position('B',rank), Position('C',rank), Position('D',rank),Position('E',rank),Position('F',rank),Position('G',rank),Position('H',rank))
+  def allPositionsByRank(rank: Rank) = List(Position('A',rank), Position('B',rank), Position('C',rank), Position('D',rank),Position('E',rank),Position('F',rank),Position('G',rank),Position('H',rank))
 
-  def allPositionsByFile(file: File): List[Position] = List(Position(file,1), Position(file,2), Position(file,3), Position(file,4),Position(file,5),Position(file,6),Position(file,7),Position(file,8))
+  def allPositionsByFile(file: File) = List(Position(file,1), Position(file,2), Position(file,3), Position(file,4),Position(file,5),Position(file,6),Position(file,7),Position(file,8))
       
 }
 

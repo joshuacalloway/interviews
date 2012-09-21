@@ -93,19 +93,20 @@ object Position {
   def apply(file: Char, rank: Int) = { 
     new Position(File(file),Rank(rank))
   }
+
   def apply(file: File, rank: Int) = { 
     new Position(file,Rank(rank))
   }
 
-  def plusFile(position: Position): Option[Position] = position.plusFile
-  def minusFile(position: Position): Option[Position] = position.minusFile
-  def plusRank(position: Position): Option[Position] = position.plusRank
-  def minusRank(position: Position): Option[Position] = position.minusRank
+  def plusFile(position: Position) = position.plusFile
+  def minusFile(position: Position) = position.minusFile
+  def plusRank(position: Position) = position.plusRank
+  def minusRank(position: Position) = position.minusRank
 
-  def minusRankminusFile(position: Position): Option[Position] = position.minusRankminusFile
-  def minusRankplusFile(position: Position): Option[Position] = position.minusRankplusFile
+  def minusRankminusFile(position: Position) = position.minusRankminusFile
+  def minusRankplusFile(position: Position) = position.minusRankplusFile
 
-  def plusRankminusFile(position: Position): Option[Position] = position.plusRankminusFile
-  def plusRankplusFile(position: Position): Option[Position] = position.plusRankplusFile
+  def plusRankminusFile(position: Position) = position.plusRankminusFile
+  def plusRankplusFile(position: Position) = position.plusRankplusFile
 
 }
