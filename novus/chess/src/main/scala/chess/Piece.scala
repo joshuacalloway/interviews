@@ -5,4 +5,5 @@ abstract class Piece(n:String, c:Color, p:Position) extends Moveable {
   val color = c
   var position = p
 
+  override def toString = color.toString + " " + name + " @ " + position.toString 
 }

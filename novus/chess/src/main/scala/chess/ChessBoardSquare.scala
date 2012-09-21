@@ -15,19 +15,34 @@ case class ChessBoardSquare(parent : ChessBoardPanel, position: Position, square
   reactions += {
     case ButtonClicked(b) => {
       if (piece != null && piece.color == parent.game.turn) {
+        println("piece: " + piece)
+        println("1. parent.game.turn " + parent.game.turn.toString())
+
         val possiblePositions = piece.possiblePositions(parent.game.board)
         parent.squares.foreach { sq => sq.unselect }
         select
         possiblePositions.foreach { X => parent.squares.filter { Y => Y.position == X }.foreach { sq => sq.select }} 
       } else if (selected) {
-        val selPieceSquare = parent.squares.filter { Y => Y.selected == true && Y.piece != null }.head
-        selPieceSquare.piece.position = position
-        parent.place(selPieceSquare.piece)
-        selPieceSquare.piece = null
-        selPieceSquare.refresh
-        parent.squares.foreach { sq => sq.unselect }
+        val selPieceSquare = parent.squares.filter { Y => Y.selected == true && Y.piece != null && Y.piece.color == parent.game.turn }.head
+        val selPiece = selPieceSquare.piece
+        println("selPiece : " + selPiece)
+        println("2. parent.game.turn " + parent.game.turn.toString())
+        val oldPos = selPiece.position
+        if (parent.game.move(selPiece, position).isCheck) {
+          parent.game.move(selPiece, oldPos)
+          parent.squares.foreach { sq => sq.unselect }
+        } else {
+          selPiece.position = position
+
+          parent.place(selPiece)
+          selPieceSquare.piece = null
+          selPieceSquare.refresh
+          parent.squares.foreach { sq => sq.unselect }
        // parent.game.nextTurn
-        GameGui.nextTurn
+          GameGui.nextTurn
+        }
+      } else {
+        println("Clicked " + piece + " @ " + position + " on " + squareColor + " square")
       }
 
     }
