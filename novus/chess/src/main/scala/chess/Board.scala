@@ -52,28 +52,13 @@ case class Board(var pieces: List[Piece]) {
     case _ => false
   }
 
-  private def allPositionsOnDiagonal1(position: Position): List[Position] = position++ match {
-    case Some(pos) => List(pos) ::: allPositionsOnDiagonal1(pos)
-    case _ => Nil
-  } 
-
-  private def allPositionsOnDiagonal2(position: Position): List[Position] = position-+ match {
-    case Some(pos) => List(pos) ::: allPositionsOnDiagonal2(pos)
-    case _ => Nil
-  } 
-  private def allPositionsOnDiagonal4(position: Position): List[Position] = position+- match {
-    case Some(pos) => List(pos) ::: allPositionsOnDiagonal4(pos)
-    case _ => Nil
-  } 
-  private def allPositionsOnDiagonal3(position: Position):List[Position] = position-- match {
-    case Some(pos) => List(pos) ::: allPositionsOnDiagonal3(pos)
-    case _ => Nil
-  } 
+  private def allPositionsOnDiagonal(position:Position, func: (Position) => Option[Position] ):List[Position] = func(position) match {
+    case None => Nil
+    case Some(pos) => List(pos) ::: allPositionsOnDiagonal(pos, func)
+  }
   
-  
-  def allPositionsOnDiagonal(position: Position) = {
-    List(position) ::: allPositionsOnDiagonal1(position) ::: allPositionsOnDiagonal2(position) ::: allPositionsOnDiagonal3(position) ::: allPositionsOnDiagonal4(position)
-
+  def allPositionsOnDiagonal(position: Position):List[Position] = {
+    List(position) ::: allPositionsOnDiagonal(position, Position++) ::: allPositionsOnDiagonal(position, Position+-) ::: allPositionsOnDiagonal(position, Position-+) ::: allPositionsOnDiagonal(position, Position--)
   }
 
   def allPositionsByRank(rank: Rank) = List(Position(A,rank), Position(B,rank), Position(C,rank), Position(D,rank),Position(E,rank),Position(F,rank),Position(G,rank),Position(H,rank))
