@@ -194,7 +194,7 @@ case class ChessBoardPanel(game: Game) extends GridPanel(10,10) {
   def place(piece: Piece) = {
     squares.find { X => X.position == piece.position } match {
       case Some(square) => square.setPiece(piece)
-      case _ => println("Warning could place piece " + piece.name + " on position " + piece.position)
+      case _ => println("Warning could not place piece " + piece.name + " on position " + piece.position)
     }
   }
 }

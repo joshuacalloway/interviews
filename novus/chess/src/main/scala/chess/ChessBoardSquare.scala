@@ -20,12 +20,13 @@ case class ChessBoardSquare(parent : ChessBoardPanel, position: Position, square
         select
         possiblePositions.foreach { X => parent.squares.filter { Y => Y.position == X }.foreach { sq => sq.select }} 
       } else if (selected) {
-        val selPieceSquare = parent.squares.filter { Y => Y.selected == true && Y.piece != null }
-        selPieceSquare.head.piece.position = position
-        parent.place(selPieceSquare.head.piece)
-        selPieceSquare.head.piece = null
-        selPieceSquare.head.refresh
+        val selPieceSquare = parent.squares.filter { Y => Y.selected == true && Y.piece != null }.head
+        selPieceSquare.piece.position = position
+        parent.place(selPieceSquare.piece)
+        selPieceSquare.piece = null
+        selPieceSquare.refresh
         parent.squares.foreach { sq => sq.unselect }
+       // parent.game.nextTurn
         GameGui.nextTurn
       }
 

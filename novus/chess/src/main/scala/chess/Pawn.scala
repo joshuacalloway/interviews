@@ -8,7 +8,7 @@ case class Pawn(var p: Position, c: Color) extends Piece("Pawn", c, p) {
     case _ => false
   }
 
-  private def onePositionForward(p: Position) = if (color == white) p*+ else p*-
+  private def onePositionForward(p: Position) = if (color == white) p+* else p-*
  
 
   private def twoPositionForward(p: Position) = onePositionForward(p) match {
@@ -16,13 +16,13 @@ case class Pawn(var p: Position, c: Color) extends Piece("Pawn", c, p) {
     case None => None
   }
 
-  private def killPosition2(board: Board, p: Position) = (onePositionForward(p), board.isPositionOccupied(onePositionForward(p).get.-*, Color.other(color))) match {
-    case (Some(x), true) => x-*
+  private def killPosition2(board: Board, p: Position) = (onePositionForward(p), board.isPositionOccupied(onePositionForward(p).get.*-, Color.other(color))) match {
+    case (Some(x), true) => x*-
     case _ => None
   }
 
-  private def killPosition1(board: Board, p: Position) = (onePositionForward(p), board.isPositionOccupied(onePositionForward(p).get.+*, Color.other(color))) match {
-    case (Some(x), true) => x+*
+  private def killPosition1(board: Board, p: Position) = (onePositionForward(p), board.isPositionOccupied(onePositionForward(p).get.*+, Color.other(color))) match {
+    case (Some(x), true) => x*+
     case _ => None
   }
 

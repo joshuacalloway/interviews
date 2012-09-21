@@ -16,7 +16,7 @@ class PawnTest extends FunSuite {
     val board = Board(pieces)
 
     val positions = whitePawn.possiblePositions(board)
-   // positions.sort((e1,e2) => (e1 < e2)).foreach ( e => println("x: " + e) )
+    positions.sort((e1,e2) => (e1 < e2)).foreach ( e => println("x: " + e) )
 
     val expected = List(Position(E, three), Position(E,four), Position(F,three))
         

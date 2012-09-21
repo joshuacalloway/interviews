@@ -62,17 +62,4 @@ object File
     case 'H' => H    
     case _ => NULL_FILE
   }
-/*
-  def apply(c: Char) = c match {
-    case 'A' => A
-    case 'B' => B
-    case 'C' => C
-    case 'D' => D
-    case 'E' => E
-    case 'F' => F
-    case 'G' => G
-    case 'H' => H    
-    case _ => throw new IllegalArgumentException("Undefined file for " + c)    
-  }
-*/
 }

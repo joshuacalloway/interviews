@@ -4,7 +4,6 @@ abstract sealed case class Rank(name:String, value:Int) {
 
   def +(other:Rank) = Rank(value+other.value)
   def -(other:Rank) = Rank(value-other.value)
-
   
   def -- = value match {
     case 2 => Some(one)

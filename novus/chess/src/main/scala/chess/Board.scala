@@ -75,9 +75,9 @@ case class Board(pieces: List[Piece]) {
 
   }
 
-  def allPositionsByRank(rank: Rank) = List(Position('A',rank), Position('B',rank), Position('C',rank), Position('D',rank),Position('E',rank),Position('F',rank),Position('G',rank),Position('H',rank))
+  def allPositionsByRank(rank: Rank) = List(Position(A,rank), Position(B,rank), Position(C,rank), Position(D,rank),Position(E,rank),Position(F,rank),Position(G,rank),Position(H,rank))
 
-  def allPositionsByFile(file: File) = List(Position(file,1), Position(file,2), Position(file,3), Position(file,4),Position(file,5),Position(file,6),Position(file,7),Position(file,8))
+  def allPositionsByFile(file: File) = List(Position(one,file), Position(two,file), Position(three,file), Position(four,file),Position(five,file),Position(six,file),Position(seven,file),Position(eight,file))
       
 }
 

@@ -11,7 +11,7 @@ case class Rook(var p: Position, c: Color) extends Piece("Rook", c, p) {
       list.filter { i => board.isSlideable(position, i, op) && ( board.isPositionEmpty(i) || board.isPositionOccupied(i, Color.other(color) ) )}
     }
 
-    foreachPosition(board, sameRank, Position+*) ::: foreachPosition(board, sameRank, Position-*) ::: foreachPosition(board, sameFile, Position*+) ::: foreachPosition(board, sameFile, Position*-)
+    foreachPosition(board, sameRank, Position*+) ::: foreachPosition(board, sameRank, Position*-) ::: foreachPosition(board, sameFile, Position+*) ::: foreachPosition(board, sameFile, Position-*)
 
   }
 }
