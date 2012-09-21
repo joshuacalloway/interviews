@@ -51,20 +51,20 @@ case class Board(pieces: List[Piece]) {
     case _ => false
   }
 
-  private def allPositionsOnDiagonal1(position: Position): List[Position] = position.plusRankplusFile match {
+  private def allPositionsOnDiagonal1(position: Position): List[Position] = position++ match {
     case Some(pos) => List(pos) ::: allPositionsOnDiagonal1(pos)
     case _ => Nil
   } 
 
-  private def allPositionsOnDiagonal2(position: Position): List[Position] = position.minusRankplusFile match {
+  private def allPositionsOnDiagonal2(position: Position): List[Position] = position-+ match {
     case Some(pos) => List(pos) ::: allPositionsOnDiagonal2(pos)
     case _ => Nil
   } 
-  private def allPositionsOnDiagonal4(position: Position): List[Position] = position.plusRankminusFile match {
+  private def allPositionsOnDiagonal4(position: Position): List[Position] = position+- match {
     case Some(pos) => List(pos) ::: allPositionsOnDiagonal4(pos)
     case _ => Nil
   } 
-  private def allPositionsOnDiagonal3(position: Position):List[Position] = position.minusRankminusFile match {
+  private def allPositionsOnDiagonal3(position: Position):List[Position] = position-- match {
     case Some(pos) => List(pos) ::: allPositionsOnDiagonal3(pos)
     case _ => Nil
   } 

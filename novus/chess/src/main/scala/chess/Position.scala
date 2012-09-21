@@ -10,64 +10,31 @@ case class Position(val file: File, val rank: Rank) {
   override def toString = "Position("+file.name+","+rank.name+")"
 
   def < (other: Position) = if (2*other.rank.value + other.file.value > 2*rank.value + file.value) true else false
+  def + (other: Position) = Position(this.file + other.file, this.rank + other.rank)
+  def - (other: Position) = Position(this.file - other.file, this.rank - other.rank)
 
   def adjacent(other: Position):Boolean = {
-    if (other == this.plusRank.get) true 
-    else if (other == this.minusRank.get) true
-    else if (other == this.plusFile.get) true
-    else if (other == this.minusFile.get) true
-    else if (other == this.plusRankplusFile.get) true
-    else if (other == this.plusRankminusFile.get) true
-    else if (other == this.minusRankplusFile.get) true
-    else if (other == this.minusRankminusFile.get) true
+    if (Some(other) == (this).+*) true 
+    else if (Some(other) == (this).-*) true
+    else if (Some(other) == (this).*+) true
+    else if (Some(other) == (this).*-) true
+    else if (Some(other) == (this).++) true
+    else if (Some(other) == (this).+-) true
+    else if (Some(other) == (this).-+) true
+    else if (Some(other) == (this).--) true
     else false
   }
-/*
-    if ((other.rank == rank.plusOne || other.rank == rank.minusOne) &&
-       (other.file == file || other.file == file.plusOne || other.file == file.minusOne)) return true
+  def *+() = if (this.rank.value + 1 <= Rank.MAX) Some(Position(file, Rank(this.rank.value + 1))) else None
+  def *-() = if (this.rank.value - 1 >= Rank.MIN) Some(Position(file, Rank(this.rank.value - 1))) else None
 
-    if ((other.file == file.plusOne || other.file == file.minusOne) &&
-       (other.rank == rank || other.rank == rank.plusOne || other.rank == rank.minusOne)) return true
-    false
-  }
-*/
-  def plusRank: Option[Position] = rank.plusOne match {
-    case Some(r) => Some(new Position(file, r))
-    case _ => None
-  }
-  def minusRank: Option[Position] = rank.minusOne match {
-    case Some(r) => Some(new Position(file, r))
-    case _ => None
-  } 
-  def plusFile: Option[Position] = file.plusOne match {
-    case Some(f) => Some(new Position(f, rank))
-    case _ => None
-  }
-  def minusFile: Option[Position] = file.minusOne match {
-    case Some(f) => Some(new Position(f, rank))
-    case _ => None
-  } 
+  def +*() = if (this.file.value + 1 <= File.MAX) Some(Position(File(this.file.value + 1), rank)) else None
+  def -*() = if (this.file.value - 1 >= File.MIN) Some(Position(File(this.file.value - 1), rank)) else None
 
-  def plusRankplusFile: Option[Position] = (rank.plusOne, file.plusOne) match {
-    case (Some(r), Some(f)) => Some(new Position(f, r))
-    case _ => None
-  }
+  def ++() = if (this.rank.value + 1 <= Rank.MAX && this.file.value + 1 <= File.MAX) Some(Position(File(this.file.value + 1),Rank(this.rank.value + 1))) else None
+  def +-() = if (this.file.value + 1 <= File.MAX && this.rank.value - 1 >= Rank.MIN) Some(Position(File(this.file.value + 1),Rank(this.rank.value - 1))) else None
 
-  def plusRankminusFile: Option[Position] = (rank.plusOne, file.minusOne) match {
-    case (Some(r), Some(f)) => Some(new Position(f, r))
-    case _ => None
-  }
-
-  def minusRankplusFile: Option[Position] = (rank.minusOne, file.plusOne) match {
-    case (Some(r), Some(f)) => Some(new Position(f, r))
-    case _ => None
-  }
-  def minusRankminusFile: Option[Position] = (rank.minusOne, file.minusOne) match {
-    case (Some(r), Some(f)) => Some(new Position(f, r))
-    case _ => None
-  }
-
- 
+  def -+() = if (this.file.value - 1 >= File.MIN && this.rank.value + 1 <= Rank.MAX) Some(Position(File(this.file.value - 1),Rank(this.rank.value + 1))) else None
+  def --() = if (this.rank.value - 1 >= Rank.MIN && this.file.value - 1 >= File.MIN) Some(Position(File(this.file.value - 1),Rank(this.rank.value - 1))) else None
 }
 
 object Position {
@@ -98,15 +65,13 @@ object Position {
     new Position(file,Rank(rank))
   }
 
-  def plusFile(position: Position) = position.plusFile
-  def minusFile(position: Position) = position.minusFile
-  def plusRank(position: Position) = position.plusRank
-  def minusRank(position: Position) = position.minusRank
+  def *+(position: Position) = position*+
+  def *-(position: Position) = position*-
+  def +*(position: Position) = position+*
+  def -*(position: Position) = position-*
 
-  def minusRankminusFile(position: Position) = position.minusRankminusFile
-  def minusRankplusFile(position: Position) = position.minusRankplusFile
-
-  def plusRankminusFile(position: Position) = position.plusRankminusFile
-  def plusRankplusFile(position: Position) = position.plusRankplusFile
-
+  def --(position: Position) = position--
+  def -+(position: Position) = position-+
+  def +-(position: Position) = position+-
+  def ++(position: Position) = position++
 }

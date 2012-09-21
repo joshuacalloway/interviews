@@ -2,7 +2,11 @@ package chess
 
 abstract sealed case class Rank(name:String, value:Int) {
 
-  def minusOne = value match {
+  def +(other:Rank) = Rank(value+other.value)
+  def -(other:Rank) = Rank(value-other.value)
+
+  
+  def -- = value match {
     case 2 => Some(one)
     case 3 => Some(two)
     case 4 => Some(three)
@@ -13,7 +17,7 @@ abstract sealed case class Rank(name:String, value:Int) {
     case _ => None
   }
 
-  def plusOne = value match {
+  def ++ = value match {
     case 1 => Some(two)
     case 2 => Some(three)
     case 3 => Some(four)
@@ -23,6 +27,7 @@ abstract sealed case class Rank(name:String, value:Int) {
     case 7 => Some(eight)
     case _ => None
   }
+
 }
 
 object one extends Rank("1",1)
@@ -36,6 +41,9 @@ object eight extends Rank("8",8)
 
 object Rank
 {
+  def MAX = 8
+  def MIN = 1
+
   def apply(c: Int) = c match {
     case 1 => one
     case 2 => two

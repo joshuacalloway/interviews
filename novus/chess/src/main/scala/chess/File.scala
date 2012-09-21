@@ -1,7 +1,10 @@
 package chess
 
 abstract sealed case class File(val name:String, value:Int) {
-  def minusOne = name match {
+  def +(other:File) = File(value+other.value)
+  def -(other:File) = File(value-other.value)
+
+  def -- = name match {
     case "B" => Some(A)
     case "C" => Some(B)
     case "D" => Some(C)
@@ -12,7 +15,7 @@ abstract sealed case class File(val name:String, value:Int) {
     case _ => None
   }
 
-  def plusOne = name match {
+  def ++ = name match {
     case "A" => Some(B)
     case "B" => Some(C)
     case "C" => Some(D)
@@ -37,6 +40,9 @@ object H extends File("H",8)
 object NULL_FILE extends File("X", -1)
 object File
 {
+  def MAX = 8
+  def MIN = 1
+
   def apply(v: Int) = v match {
     case 1 => A
     case 2 => B
@@ -46,9 +52,17 @@ object File
     case 6 => F
     case 7 => G
     case 8 => H    
+    case 'A' => A
+    case 'B' => B
+    case 'C' => C
+    case 'D' => D
+    case 'E' => E
+    case 'F' => F
+    case 'G' => G
+    case 'H' => H    
     case _ => NULL_FILE
   }
-
+/*
   def apply(c: Char) = c match {
     case 'A' => A
     case 'B' => B
@@ -60,4 +74,5 @@ object File
     case 'H' => H    
     case _ => throw new IllegalArgumentException("Undefined file for " + c)    
   }
+*/
 }

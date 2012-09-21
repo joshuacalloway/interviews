@@ -12,7 +12,7 @@ case class Queen(var p: Position, c: Color) extends Piece("Queen", c, p) {
       list.filter { i => board.isSlideable(position, i, op) && ( board.isPositionEmpty(i) || board.isPositionOccupied(i, Color.other(color) ) )}
     }
 
-    foreachPosition(board, sameDiagonal, Position.plusRankplusFile) ::: foreachPosition(board, sameDiagonal, Position.plusRankminusFile) ::: foreachPosition(board, sameDiagonal, Position.minusRankplusFile) ::: foreachPosition(board, sameDiagonal, Position.minusRankminusFile) ::: foreachPosition(board, sameRank, Position.plusFile) ::: foreachPosition(board, sameRank, Position.minusFile) ::: foreachPosition(board, sameFile, Position.plusRank) ::: foreachPosition(board, sameFile, Position.minusRank)
+    foreachPosition(board, sameDiagonal, Position++) ::: foreachPosition(board, sameDiagonal, Position+-) ::: foreachPosition(board, sameDiagonal, Position-+) ::: foreachPosition(board, sameDiagonal, Position--) ::: foreachPosition(board, sameRank, Position*+) ::: foreachPosition(board, sameRank, Position*-) ::: foreachPosition(board, sameFile, Position+*) ::: foreachPosition(board, sameFile, Position-*)
   }
 
 

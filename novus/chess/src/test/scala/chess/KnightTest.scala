@@ -22,10 +22,10 @@ class KnightTest extends FunSuite {
     val board = Board(pieces)
 
     val positions = whiteKnight.possiblePositions(board)
-   // positions.sort((e1,e2) => (e1 < e2)).foreach ( e => println("x: " + e) )
+//    positions.sort((e1,e2) => (e1 < e2)).foreach ( e => println("x: " + e) )
 
     val expected = List(Position(D, five), Position(B,five), Position(B,one), Position(A,2), Position(A,4), Position(E,4))
-    //println("----")
+  //  println("----")
     //expected.sort((e1,e2) => (e1 < e2)).foreach ( e => println("y: " + e) )
     
     assert(positions.sort((e1,e2) => (e1 < e2)) == expected.sort((e1,e2) => (e1 < e2)))
