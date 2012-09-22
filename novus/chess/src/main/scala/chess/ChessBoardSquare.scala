@@ -12,34 +12,40 @@ case class ChessBoardSquare(parent : ChessBoardPanel, position: Position, square
     foreground = getAwtPieceColor
   }
 
+  def unselectAll() = parent.squares.foreach { square => square.unselect }
+  def isMoveablePiece() = piece != null && piece.color == parent.game.turn
+  def debugClick() = println("Clicked " + piece + " @ " + position + " on " + squareColor + " square")
+  def getSourceSquare() = parent.squares.filter { Y => Y.selected == true && Y.piece != null && Y.piece.color == parent.game.turn }.head
+  def movePiece(selPieceSquare:ChessBoardSquare,selPiece:Piece, newPos:Position) = {
+    selPiece.position = position
+    parent.place(selPiece)
+    selPieceSquare.piece = null
+    selPieceSquare.refresh
+  }
+
   listenTo(button)
   reactions += {
     case ButtonClicked(b) => {
-      if (piece != null && piece.color == parent.game.turn) {
+      if (isMoveablePiece()) {
         val possiblePositions = piece.possiblePositions(parent.game.board)
-        parent.squares.foreach { sq => sq.unselect }
+        unselectAll()
         select
         possiblePositions.foreach { X => parent.squares.filter { Y => Y.position == X }.foreach { sq => sq.select }} 
       } else if (selected) {
-        val selPieceSquare = parent.squares.filter { Y => Y.selected == true && Y.piece != null && Y.piece.color == parent.game.turn }.head
+        val selPieceSquare = getSourceSquare()
         val selPiece = selPieceSquare.piece
         val oldPos = selPiece.position
         if (parent.game.move(selPiece, position).isCheck) {
           parent.game.move(selPiece, oldPos)
-          parent.squares.foreach { sq => sq.unselect }
+          unselectAll()
         } else {
-          selPiece.position = position
-
-          parent.place(selPiece)
-          selPieceSquare.piece = null
-          selPieceSquare.refresh
-          parent.squares.foreach { sq => sq.unselect }
+          movePiece(selPieceSquare, selPiece, position)
+          unselectAll()
           GameGui.nextTurn
         }
       } else {
-        println("Clicked " + piece + " @ " + position + " on " + squareColor + " square")
+        debugClick()
       }
-
     }
   }
   contents += button
