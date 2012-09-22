@@ -13,18 +13,13 @@ case class Board(var pieces: List[Piece]) {
     case _ => None
   }
 
-  def isPositionEmpty(positionOption: Option[Position]) = positionOption match {
-    case Some(position) => pieces.find{ p => p.position == position }.isEmpty
-    case _ => false
-  }
+  def isPositionEmpty(position: Position) = pieces.find{ p => p.position == position }.isEmpty
+
+  def isPositionEmpty(positionOption: Option[Position]):Boolean = isPositionEmpty(positionOption.get)
 
   def isPositionOccupied(position: Position) = !isPositionEmpty(position)
 
   def isPositionOccupied(positionOption: Option[Position]) = !isPositionEmpty(positionOption)
-
-  def isPositionEmpty(position: Position) = {
-    pieces.find{ p => p.position == position }.isEmpty
-  }
 
   def getPieceAtPosition(position: Position) = pieces.find{ p => p.position == position }
 
@@ -33,11 +28,8 @@ case class Board(var pieces: List[Piece]) {
     case _ => false
   }
 
-  def isPositionOccupied(position: Option[Position], color: Color): Boolean = position match {
-    case Some(pos) => isPositionOccupied(pos, color)
-    case _ => false
-  }
-    
+ def isPositionOccupied(position: Option[Position], color: Color): Boolean = isPositionOccupied(position.getOrElse(null), color)
+  
   // for Knights
   def jumpToPosition(start: Position, steps: List[ (Position) => Option[Position] ]): Option[Position] = steps match {
     case Nil => Some(start)
@@ -64,12 +56,9 @@ case class Board(var pieces: List[Piece]) {
   def allPositionsByRank(rank: Rank) = List(Position(A,rank), Position(B,rank), Position(C,rank), Position(D,rank),Position(E,rank),Position(F,rank),Position(G,rank),Position(H,rank))
 
   def allPositionsByFile(file: File) = List(Position(one,file), Position(two,file), Position(three,file), Position(four,file),Position(five,file),Position(six,file),Position(seven,file),Position(eight,file))
-      
 }
 
 object Board {
-
-
   def createInitial = {
       val pieces = List[Piece](
 			       Rook(Position(A,1),white),
@@ -89,8 +78,6 @@ object Board {
                                Pawn(Position(F,2),white),
                                Pawn(Position(G,2),white),
                                Pawn(Position(H,2),white),
-
-
 			       Rook(Position(A,8),black),
 			       Rook(Position(H,8),black),
                                Knight(Position(B,8),black),
