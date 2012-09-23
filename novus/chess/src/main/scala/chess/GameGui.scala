@@ -3,10 +3,10 @@ package chess
 import scala.swing._
 
 object GameGui extends SimpleSwingApplication {
-  val checkStatus = new Label("Game is in progress")
-  val game = Game(Board.createInitial)
-  val chessBoardPanel = new ChessBoardPanel(game)
-  val turnLabel = new TextField {
+  private val checkStatus = new Label("Game is in progress")
+  private val game = Game(Board.createInitial)
+  private val chessBoardPanel = new ChessBoardPanel(game)
+  private val turnLabel = new TextField {
     text = game.turn.toString
     columns = 5
     editable = false
@@ -24,5 +24,5 @@ object GameGui extends SimpleSwingApplication {
     if (game.isCheckMate) checkStatus.text = "Check Mate, " + Color.other( game.turn ) + " won the game." else if (game.isCheck) checkStatus.text = "Check of " + game.turn.name + " King." else checkStatus.text = "Game is in progress"
   }
 
-  def turn = game.turn
+  private def turn = game.turn
 }

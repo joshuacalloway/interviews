@@ -9,6 +9,6 @@ class BoardTest extends FunSuite {
     val whiteKing = King(Position(D,1), white)
     val pieces = List(blackKing, whiteKing)
     val board = Board(pieces)
-    assert(posC8 == board.findKingPosition(black).get)
+    assert(posC8 === board.findKingPosition(black).get)
   }
 }

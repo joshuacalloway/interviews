@@ -28,7 +28,7 @@ class KnightTest extends FunSuite {
   //  println("----")
     //expected.sort((e1,e2) => (e1 < e2)).foreach ( e => println("y: " + e) )
     
-    assert(positions.sort((e1,e2) => (e1 < e2)) == expected.sort((e1,e2) => (e1 < e2)))
+    assert(positions.sort((e1,e2) => (e1 < e2)) === expected.sort((e1,e2) => (e1 < e2)))
 
   }
 }

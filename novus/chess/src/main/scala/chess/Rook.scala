@@ -1,9 +1,8 @@
 package chess
 
 case class Rook(var p: Position, c: Color) extends Piece("Rook", c, p) {
- 
- 
-  def possiblePositions(board: Board) : List[Position] = {
+  
+  override def possiblePositions(board: Board) : List[Position] = {
     val sameRank = board.allPositionsByRank(position.rank)
     val sameFile = board.allPositionsByFile(position.file)
 

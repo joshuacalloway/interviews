@@ -6,7 +6,7 @@ class GameTest extends FunSuite {
   test("basic intersection of List[Position]") {
     val list1 = List( Position(C,1), Position(A,3))
     val list2 = List( Position(C,1), Position(A,5))
-    assert(list1.intersect(list2) == List(Position(C,1)))
+    assert(list1.intersect(list2) === List(Position(C,1)))
   }
   test("basic check of Black King") {
     val posD8 = Position(D,8)

@@ -36,7 +36,6 @@ case class Board(var pieces: List[Piece]) {
     case head :: tail if !head(start).isEmpty => jumpToPosition(head(start).get, tail)
     case _ => None
   }
-
                                                                                       // for Rooks, Bishops, Queen
   def isSlideable(start: Position, end: Position, movement: (Position) => Option[Position] ): Boolean = movement(start) match {
     case Some(otherPosition) if otherPosition == end => true

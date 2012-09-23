@@ -14,6 +14,6 @@ class ColorTest extends FunSuite {
     val pieces = List(blackPawn)
     val board = Board(pieces)
     val game = Game(board)
-    assert(game.turn == white)
+    assert(game.turn === white)
   }
 }

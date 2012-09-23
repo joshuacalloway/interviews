@@ -2,7 +2,7 @@ package chess
 
 case class Queen(var p: Position, c: Color) extends Piece("Queen", c, p) {
 
-  def possiblePositions(board: Board) : List[Position] = {
+  override def possiblePositions(board: Board) : List[Position] = {
     val sameDiagonal = board.allPositionsOnDiagonal(position)
     val sameRank = board.allPositionsByRank(position.rank)
     val sameFile = board.allPositionsByFile(position.file)

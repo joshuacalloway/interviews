@@ -3,14 +3,13 @@ package chess
 
 // http://en.wikipedia.org/wiki/Chessboard
 
-case class Position(val rank: Rank, val file: File) {
-
+case class Position(rank: Rank, file: File) extends Ordered[Position] {
   def color = if ((file.value + rank.value) % 2 == 0 ) black else white
-
-  override def toString = "Position("+file.name+","+rank.name+")"
+  //override def toString = "Position("+file.name+","+rank.name+")"
   def value = 2*rank.value + file.value
 
-  def < (other: Position) = other.value > value
+  override def compare(that: Position) = value - that.value
+  
   def - (other: Position) = Position(rank + other.rank, file + other.file)
   def + (other: Position) = Position(rank - other.rank, file - other.file)
 
@@ -56,8 +55,6 @@ object Position {
     case (Some(r), Some(f)) => Some(Position(r,f))
     case _ => None
   }
-
- // def apply(file: Option[File], rank: Option[Rank]) :Position = apply(rank,file)
 
   def apply(rank:Rank, file: Int):Position = apply(rank,File(file))
   def apply(file: Int, rank:Rank):Position = apply(rank,File(file))

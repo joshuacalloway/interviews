@@ -16,11 +16,11 @@ class PawnTest extends FunSuite {
     val board = Board(pieces)
 
     val positions = whitePawn.possiblePositions(board)
-    positions.sort((e1,e2) => (e1 < e2)).foreach ( e => println("x: " + e) )
+//    positions.sort((e1,e2) => (e1 < e2)).foreach ( e => println("x: " + e) )
 
     val expected = List(Position(E, three), Position(E,four), Position(F,three))
         
-    assert(positions.sort((e1,e2) => (e1 < e2)) == expected.sort((e1,e2) => (e1 < e2)))
+    assert(positions.sort((e1,e2) => (e1 < e2)) === expected.sort((e1,e2) => (e1 < e2)))
   }
   test("possiblePositions for White Pawn on E4. Black Pawn on E5") {
     val posE4 = Position(E, four)
@@ -33,6 +33,6 @@ class PawnTest extends FunSuite {
     val positions = whitePawn.possiblePositions(board)
     val expected = List[Position]()
         
-    assert(positions.sort((e1,e2) => (e1 < e2)) == expected.sort((e1,e2) => (e1 < e2)))
+    assert(positions.sort((e1,e2) => (e1 < e2)) === expected.sort((e1,e2) => (e1 < e2)))
   }
 }
