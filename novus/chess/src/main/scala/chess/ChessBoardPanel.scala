@@ -8,6 +8,10 @@ case class ChessBoardPanel(game: Game) extends GridPanel(10,10) {
   val allFiles = List[File](A, B, C, D, E, F, G, H)
   val allRanks = List[Rank](eight, seven, six, five, four, three, two, one)
 
+  private[chess] def unselectAll() = squares.foreach { square => square.unselect }
+
+  private[chess] def getSourceSquare() = squares.filter { Y => Y.selected == true && Y.piece != null && Y.piece.color == game.turn }.head
+
   private def printFileLabels() = {
     contents += new Label("")
     for (f <- allFiles) {
