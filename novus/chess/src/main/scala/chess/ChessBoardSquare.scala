@@ -13,13 +13,34 @@ case class ChessBoardSquare(parent : ChessBoardPanel, position: Position, square
   }
 
   private def isMoveablePiece() = piece != null && piece.color == parent.game.turn
-  private def debugClick() = println("Clicked " + piece + " @ " + position + " on " + squareColor + " square")
+  private def debugClick() = {
+    println("Clicked " + piece + " @ " + position + " on " + squareColor + " square")
+    println("Clicked isPositionOccupied white " + parent.game.board.isPositionOccupied(position, white))
+    println("Clicked isPositionOccupied black " + parent.game.board.isPositionOccupied(position, black))
+    println("getPieceAtPosition " + parent.game.board.getPieceAtPosition(position))
+  }
 
-  private def movePiece(selPieceSquare:ChessBoardSquare,selPiece:Piece, newPos:Position) = {
-    selPiece.position = position
-    parent.place(selPiece)
+  private def promotePiece(selPieceSquare:ChessBoardSquare,selPiece:Piece, newPos:Position) = {
+    parent.remove(position)
+    parent.remove(selPiece.position)
+    val q = Queen(newPos, selPiece.color)
+    parent.place(q)
     selPieceSquare.piece = null
     selPieceSquare.refresh
+    parent.game.board.pieces = q :: parent.game.board.pieces
+  }
+
+  private def movePiece(selPieceSquare:ChessBoardSquare,selPiece:Piece, newPos:Position) = selPiece match {
+    case Pawn(pos,col) if selPiece.color == white && newPos.rank == eight => promotePiece(selPieceSquare,selPiece,newPos)
+    case Pawn(pos,col) if selPiece.color == black && newPos.rank == one => promotePiece(selPieceSquare,selPiece,newPos)
+    case _ => {
+      parent.remove(position)
+      selPiece.position = position
+      parent.place(selPiece)
+      selPieceSquare.piece = null
+      selPieceSquare.refresh
+      parent.game.move(selPiece, newPos)
+    }
   }
 
   listenTo(button)
@@ -38,13 +59,13 @@ case class ChessBoardSquare(parent : ChessBoardPanel, position: Position, square
           parent.game.move(selPiece, oldPos)
           parent.unselectAll()
         } else {
+          parent.game.move(selPiece, oldPos)
           movePiece(selPieceSquare, selPiece, position)
           parent.unselectAll()
           GameGui.nextTurn
         }
-      } else {
-        debugClick()
       }
+      debugClick()
     }
   }
   contents += button

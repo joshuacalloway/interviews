@@ -36,6 +36,9 @@ case class ChessBoardPanel(game: Game) extends GridPanel(10,10) {
   printFileLabels()
   game.board.pieces.foreach (piece => place(piece) )
 
+  def remove(pos: Position) {
+    game.board.pieces = game.board.pieces.filter { X => X.position != pos }
+  }
   def place(piece: Piece) = {
     squares.find { X => X.position == piece.position } match {
       case Some(square) => square.setPiece(piece)

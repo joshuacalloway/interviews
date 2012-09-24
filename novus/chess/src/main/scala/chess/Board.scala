@@ -15,7 +15,10 @@ case class Board(var pieces: List[Piece]) {
 
   def isPositionEmpty(position: Position) = pieces.find{ p => p.position == position }.isEmpty
 
-  def isPositionEmpty(positionOption: Option[Position]):Boolean = isPositionEmpty(positionOption.get)
+  def isPositionEmpty(positionOption: Option[Position]):Boolean = positionOption match {
+    case Some(pos) => isPositionEmpty(pos)
+    case _ => true
+  }
 
   def isPositionOccupied(position: Position) = !isPositionEmpty(position)
 
@@ -61,7 +64,6 @@ object Board {
   def createInitial = {
       val pieces = List[Piece](
 			       Rook(Position(A,1),white),
-			       Rook(Position(H,1),white),
                                Knight(Position(B,1),white),
                                Bishop(Position(C,1),white),
                                Queen(Position(D,1),white),
@@ -78,7 +80,6 @@ object Board {
                                Pawn(Position(G,2),white),
                                Pawn(Position(H,2),white),
 			       Rook(Position(A,8),black),
-			       Rook(Position(H,8),black),
                                Knight(Position(B,8),black),
                                Bishop(Position(C,8),black),
                                Queen(Position(D,8),black),

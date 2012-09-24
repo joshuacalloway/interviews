@@ -2,9 +2,9 @@ package chess
 
 case class Pawn(var p: Position, c: Color) extends Piece("Pawn", c, p) {
 
-  private def neverMoved: Boolean = (position.rank.value, color) match {
-    case (2, white) => true
-    case (7, black) => true
+  private def neverMoved: Boolean = position.rank.value match {
+    case 2 if color == white => true
+    case 7 if color == black => true
     case _ => false
   }
 
@@ -16,13 +16,13 @@ case class Pawn(var p: Position, c: Color) extends Piece("Pawn", c, p) {
     case None => None
   }
 
-  private def killPosition2(board: Board, p: Position) = (onePositionForward(p), board.isPositionOccupied(onePositionForward(p).get.*-, Color.other(color))) match {
-    case (Some(x), true) => x*-
+  private def killPosition2(board: Board, p: Position) = onePositionForward(p) match {
+    case Some(x) if board.isPositionOccupied(onePositionForward(p).get.*-, Color.other(color)) => x*-
     case _ => None
   }
 
-  private def killPosition1(board: Board, p: Position) = (onePositionForward(p), board.isPositionOccupied(onePositionForward(p).get.*+, Color.other(color))) match {
-    case (Some(x), true) => x*+
+  private def killPosition1(board: Board, p: Position) = onePositionForward(p) match {
+    case Some(x) if board.isPositionOccupied(onePositionForward(p).get.*+, Color.other(color)) => x*+
     case _ => None
   }
 
