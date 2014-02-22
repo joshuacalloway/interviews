@@ -1,0 +1,3 @@
+[submodule "ubs"]
+	path = ubs
+	url = git@bitbucket.org:calloway/horserace.git
