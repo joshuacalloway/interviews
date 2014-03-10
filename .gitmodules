@@ -4,3 +4,12 @@
 [submodule "rally"]
 	path = rally
 	url = git@bitbucket.org:calloway/rally
+[submodule "skytree"]
+	path = skytree
+	url = git@bitbucket.org:calloway/skytree
+[submodule "vmware"]
+	path = vmware
+	url = git@bitbucket.org:calloway/vmware
+[submodule "tetris"]
+	path = tetris
+	url = git@bitbucket.org:calloway/tetris
