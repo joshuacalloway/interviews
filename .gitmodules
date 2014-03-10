@@ -1,3 +1,6 @@
 [submodule "ubs"]
 	path = ubs
 	url = git@bitbucket.org:calloway/horserace.git
+[submodule "rally"]
+	path = rally
+	url = git@bitbucket.org:calloway/rally
